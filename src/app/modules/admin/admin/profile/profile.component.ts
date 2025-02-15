@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { UserI } from '../../../../interfaces/user.interface';
 import { lusers } from '../../../../datasource/user.datasource';
 import { ProfileI } from '../../../../interfaces/profile.interface';
@@ -13,7 +13,7 @@ import { lprofileuser } from '../../../../datasource/profile-user.datasource';
 })
 export class ProfileComponent implements OnInit {
 
-  userid: any = 1;
+  userid: any;
   username: string = '';
   email: string = '';
 
@@ -24,7 +24,14 @@ export class ProfileComponent implements OnInit {
   profilesByUser: ProfileI[] = [];
   profilesSystem: ProfileI[] = [];
 
+  @Output() outEvent = new EventEmitter();
+
   ngOnInit(): void {
+    // this.getUserProfiles();
+    // this.getSystemProfiles();
+  }
+
+  onUserSelected() {
     this.getUserProfiles();
     this.getSystemProfiles();
   }
@@ -78,5 +85,23 @@ export class ProfileComponent implements OnInit {
     }
 
   }
-  
+
+  addProfiles(profile: ProfileI) {
+     // obtener la posición del perfil a quitar
+     let profileIndex = this.profilesSystem.indexOf(profile);
+     // quitamos el perfil con el método splice indicando que solo se eliminará 1 elemento desde la posición del perfil a eliminar
+     this.profilesSystem.splice(profileIndex, 1);
+     // buscamos en la lista de perfiles del usuario si existe el perfil eliminado para agregarlo
+     let profileUserValidation = this.profilesByUser.find( profileSystem => profileSystem.profileid == profile.profileid );
+     // validamos si existe el perfil eliminado en la lista de perfiles del usuario
+     if(!profileUserValidation) {
+       // si no existe se agrega a la lista de perfiles del usuario
+       this.profilesByUser.push(profile);
+     }
+  }
+   outEventClick() {
+     this.outEvent.emit();
+    this.profilesByUser = [];
+    this.profilesSystem = [];
+   }
 }

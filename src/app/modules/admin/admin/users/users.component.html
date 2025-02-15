@@ -15,10 +15,12 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
                 <td>
-                    <button class="btn btn-primary" type="button">Actualizar roles</button>
+                    <button class="btn btn-primary" type="button" [disabled]="userSelected.userid" (click)="eventSelectUser(user)">Actualizar roles</button>
                 </td>
             </tr>
         </tbody>
     </table>
-    <app-profile></app-profile>
+    <div [hidden]="!userSelected.userid">
+        <app-profile (outEvent)="dataUserRestore()"></app-profile>
+    </div>
 </div>
