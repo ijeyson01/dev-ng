@@ -1,0 +1,10 @@
+<form [formGroup]="frmCarRx">
+    <label for="marcaid">Marca</label>
+    <input class="form-control" formControlName="marca" type="text" name="marcaname" id="marcaid">
+    <div class="alert alert-warning" *ngIf="frmCarRx.get('marca')?.touched && frmCarRx.get('marca')?.errors?.['required']">
+        El campo marca es requerido
+    </div>
+    <div class="alert alert-warning" *ngIf="frmCarRx.get('marca')?.errors?.['minlength']">
+        La marca debe tener al menos 10 digitos
+    </div>
+</form>

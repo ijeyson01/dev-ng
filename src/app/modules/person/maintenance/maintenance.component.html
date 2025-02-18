@@ -1,4 +1,5 @@
-<form #personForm="ngForm" (ngSubmit)="savePersonMaintenance(personForm)"> <!-- #personForm="ngForm" : Formulario del tipo template-driven -->
+<!-- #personForm="ngForm" : Formulario del tipo template-driven -->
+<form #personForm="ngForm" (ngSubmit)="savePersonMaintenance(personForm)"> 
     <!-- 
     establecer labels y campos de entrada nombres, apellidos,identificacion, email y contraseña. 
     -->
@@ -10,7 +11,7 @@
     <div>
         <label for="nombre">Apellido:</label>
         <input type="text" class="form-control" [(ngModel)]="apellido" [minlength]="10" [required]="true" #apellidoForm="ngModel" name="apellido"  id="apellido">
-        <div [hidden]="apellidoForm.valid || apellidoForm.pristine" class="alert alert-warning">Campo invalido</div>
+        <div [hidden]="apellidoForm.valid || apellidoForm.pristine" class="alert alert-warning">El apellido debe tener al menos 10 caracteres</div>
     </div>
     <div>
         <label for="nombre">Identificaci&oacute;n:</label>

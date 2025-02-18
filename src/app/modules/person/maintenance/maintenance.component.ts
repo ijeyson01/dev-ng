@@ -16,7 +16,7 @@ export class MaintenanceComponent {
 
   savePersonMaintenance(personForm: NgForm) {
     if(personForm.valid) {
-      alert( 'Validacion exitosa' )
+      alert( 'Validacion exitosa' );
     } else {
       alert( 'Valores inconsistentes' );
     }
