@@ -1,1 +1,12 @@
-<p>maintenance works!</p>
+<form #personForm="ngForm" (ngSubmit)="savePersonMaintenance(personForm)"> <!-- #personForm="ngForm" : Formulario del tipo template-driven -->
+    <!-- 
+    establecer labels y campos de entrada nombres, apellidos,identificacion, email y contraseña. 
+    -->
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" [(ngModel)]="nombre" [minlength]="15" [required]="true" #nombreForm="ngModel" name="nombre"  id="nombre">
+        <div [hidden]="nombreForm.valid || nombreForm.pristine" class="alert alert-warning">Campo invalido</div>
+    </div>
+    
+    <button class="btn btn-success" type="submit" (submit)="savePersonMaintenance(personForm)">Guardar</button>
+</form>
