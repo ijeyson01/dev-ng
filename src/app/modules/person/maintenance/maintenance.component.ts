@@ -9,6 +9,10 @@ import { NgForm } from '@angular/forms';
 export class MaintenanceComponent {
 
   nombre: string = '';
+  apellido: string = '';
+  identificacion: string = '';
+  email: string = '';
+  contrasenia: string = '';
 
   savePersonMaintenance(personForm: NgForm) {
     if(personForm.valid) {
