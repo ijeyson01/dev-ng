@@ -7,7 +7,34 @@
             La marca no puede estar vacía
         </div>
         <div class="alert alert-warning" *ngIf="frmCarRx.get('marca')?.errors?.['minlength']">
-            La marca debe tener al menos 10 digitos
+            La marca debe tener al menos 4 digitos
         </div>
+    </div>
+    <!-- Agregar los 2 campos faltantes del formulario reactivo.-->
+    <div>
+        <label for="modeloid">Modelo</label>
+        <input class="form-control" type="text" formControlName="modelo" name="modeloname" id="modeloid">
+        <div class="alert alert-warning"
+            *ngIf="frmCarRx.get('modelo')?.touched && frmCarRx.get('modelo')?.errors?.['required']">
+            La modelo no puede estar vacío
+        </div>
+        <div class="alert alert-warning" *ngIf="frmCarRx.get('modelo')?.errors?.['minlength']">
+            El modelo debe tener al menos {{ frmCarRx.get('modelo')?.errors?.['minlength']?.requiredLength }} digitos
+        </div>
+    </div>
+    <div>
+        <label for="anioid">A&ntilde;o</label>
+        <input class="form-control" type="text" formControlName="anio" name="anioname" id="anioid">
+        <div class="alert alert-warning"
+            *ngIf="frmCarRx.get('anio')?.touched && frmCarRx.get('anio')?.errors?.['required']">
+            El a&ntilde;o no puede estar vacío
+        </div>
+        <div class="alert alert-warning" *ngIf="frmCarRx.get('anio')?.errors?.['max']">
+            El a&ntilde;o no puede ser mayor a {{ frmCarRx.get('anio')?.errors?.['max']?.max }}
+        </div>
+    </div>
+    <div>
+        <label for="tipoid">Tipo</label>
+        <input class="form-control" formControlName="tipo" name="tiponame" id="tipoid">
     </div>
 </form>
