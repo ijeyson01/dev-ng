@@ -21,6 +21,9 @@
         <div class="alert alert-warning" *ngIf="frmCarRx.get('modelo')?.errors?.['minlength']">
             El modelo debe tener al menos {{ frmCarRx.get('modelo')?.errors?.['minlength']?.requiredLength }} digitos
         </div>
+        <div class="alert alert-warning" *ngIf="frmCarRx.get('modelo')?.errors?.['pattern']">
+            El modelo solo debe tener may&uacute;sculas.
+        </div>
     </div>
     <div>
         <label for="anioid">A&ntilde;o</label>
@@ -32,9 +35,28 @@
         <div class="alert alert-warning" *ngIf="frmCarRx.get('anio')?.errors?.['max']">
             El a&ntilde;o no puede ser mayor a {{ frmCarRx.get('anio')?.errors?.['max']?.max }}
         </div>
+        <div class="alert alert-danger" *ngIf="frmCarRx.get('anio')?.errors?.['pattern']">
+            El a&ntilde;o solo acepta n&uacute;meros.
+        </div>
     </div>
     <div>
         <label for="tipoid">Tipo</label>
-        <input class="form-control" formControlName="tipo" name="tiponame" id="tipoid">
+        <select class="form-control" formControlName="tipo" name="tiponame" id="tipoid">
+            <option [value]="''">Seleccione una opci&oacute;n...</option>
+            <option [value]="'SUV'">SUV</option>
+            <option [value]="'SEDAN'">SEDAN</option>
+        </select>
+        <div class="alert alert-warning"
+            *ngIf="frmCarRx.get('tipo')?.touched && frmCarRx.get('tipo')?.errors?.['required']">
+            El tipo no puede estar vacío
+        </div>
+        <div class="alert alert-warning"
+            *ngIf="frmCarRx.get('tipo')?.touched && frmCarRx.get('tipo')?.errors?.['minlength']">
+            El tipo debe tener al menos {{ frmCarRx.get('tipo')?.errors?.['minlength']?.requiredLength }} carateres
+        </div>
+        <div class="alert alert-warning"
+            *ngIf="frmCarRx.get('tipo')?.touched && frmCarRx.get('tipo')?.errors?.['maxlength']">
+            El tipo debe no puede tener m&aacute;s de {{ frmCarRx.get('tipo')?.errors?.['maxlength']?.requiredLength }} carateres
+        </div>
     </div>
 </form>

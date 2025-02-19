@@ -19,8 +19,9 @@ export class MaintenanceComponent implements OnInit {
   initForm() : FormGroup {
     return this.frmBuilder.group({
       marca: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)] ],
-      modelo: ['', [Validators.required, Validators.minLength(8)] ],
-      anio: [2000, [Validators.pattern('[0-9]*$'), Validators.minLength(4), Validators.max(2025) ]]
+      modelo: ['', [Validators.pattern('[A-Z]*$') ,Validators.required, Validators.minLength(8)] ],
+      anio: [2000, [Validators.pattern('[0-9]*$'), Validators.minLength(4), Validators.max(2025) ]],
+      tipo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(5)]]
     });
   }
 
