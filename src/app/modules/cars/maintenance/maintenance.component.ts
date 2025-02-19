@@ -25,4 +25,21 @@ export class MaintenanceComponent implements OnInit {
     });
   }
 
+  sendInfo(){
+    if(this.frmCarRx.valid) {
+      let datosAuto: CarI = this.frmCarRx.value;
+      alert(JSON.stringify(datosAuto));
+    } else {
+      alert('Los datos ingresados no son validos');
+    }
+    // alert(JSON.stringify(this.frmCarRx.value.marca));
+  }
+
+}
+
+interface CarI {
+  marca: string,
+  modelo: string,
+  anio: number,
+  tipo: string
 }
