@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styles: ``
 })
 export class MaintenanceComponent implements OnInit {
+
+  @ViewChild('carsFormControl') divCarsControl!: ElementRef;
+  renderer = inject(Renderer2);
+
   
   constructor(private readonly frmBuilder: FormBuilder){}
 
@@ -33,6 +37,10 @@ export class MaintenanceComponent implements OnInit {
       alert('Los datos ingresados no son validos');
     }
     // alert(JSON.stringify(this.frmCarRx.value.marca));
+  }
+
+  newControl(control: HTMLElement) {
+    this.renderer.appendChild(this.divCarsControl ,control);
   }
 
 }
