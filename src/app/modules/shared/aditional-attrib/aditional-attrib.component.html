@@ -1,1 +1,32 @@
-<p>aditional-attrib works!</p>
+<div>
+    <div>
+        <button class="btn btn-warning m-2">
+            Agregar campo
+        </button>
+    </div>
+    <div>
+        <div class="h4">
+            <!-- TITULO-->
+             Definici&oacute;n de nuevo control
+        </div>
+        <div>
+            <!--TIPO DE CONTROL-->
+            <label for="tipocontrolid">Tipo de control</label>
+            <select class="form-select" name="tipocontrol" id="tipocontrolid">
+                <option [value]="''">Selecciona el tipo de control...</option>
+                <option [value]="'text'">Texto</option>
+                <option [value]="'select'">Lista de opciones</option>
+                <option [value]="'check'">Opci&oacute;n</option>
+            </select>
+        </div>
+        <div>
+            <!-- ETIQUETA DEL CONTROL -->
+             <label for="etiquetaid">Etiqueta del control</label>
+             <input class="form-control" type="text" name="etiquetaname" id="etiquetaid" placeholder="Ingresa el texto de la etiqueta">
+        </div>
+        <div class="form-control mt-3">
+            <!-- VALIDACIONES DEL CONTROL -->
+
+        </div>
+    </div>
+</div>
