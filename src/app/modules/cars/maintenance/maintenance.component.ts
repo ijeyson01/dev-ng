@@ -1,5 +1,5 @@
-import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, ElementRef, inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ControlDataI } from '../../../interfaces/control-data.interface';
 
 @Component({
@@ -11,7 +11,7 @@ export class MaintenanceComponent implements OnInit {
 
   renderer = inject(Renderer2);
 
-  constructor(private readonly frmBuilder: FormBuilder, private divCarsControl: ElementRef){}
+  constructor(private readonly frmBuilder: FormBuilder, private divCarsControl: ElementRef, private readonly change: ChangeDetectorRef){}
 
   frmCarRx!: FormGroup;
 
@@ -39,42 +39,48 @@ export class MaintenanceComponent implements OnInit {
   }
 
   newControl(control: ControlDataI) {
-    const divCarsForm = this.divCarsControl.nativeElement.querySelector('#carsFormControl');
-    this.renderer.appendChild(divCarsForm, control.control);
-    let formControlNameValue: string = control.control.getAttribute('formControlName')!;
-    let validationsControlValues: Validators[] = [];
+    
+    let formControlNameValue: string = control.formControlNameValue;
+    // AGREGAR UN OBJETO DE TIPO FORMCONTROL AL OBJETO DE FORMULARIO REACTIVO CON NUESTRO
+    // CONTROL:
+    this.frmCarRx.addControl(formControlNameValue, new FormControl());
     control.validation.forEach( validation => {
+
+      // VALIDAR LA EXISTENCIA DE LAS VALIDACIONES DEFINIDAS PARA EL CONTROL:
       switch (validation.validation) {
         case Validators.required.name: {
           if(validation.status) {
-            validationsControlValues.push(Validators.required);
+            // SI LA VALIDACION SE APLICÓ, SE AGREGA AL CONTROL PREVIAMENTE AGREGADO
+            // DE LA SIGUIENTE MANERA
+            this.frmCarRx.controls[formControlNameValue].addValidators(Validators.required);
           }
           break;
         }
         case Validators.minLength.name: {
           if(validation.status) {
-            validationsControlValues.push(Validators.minLength(Number(validation.valueValidation)));
+            this.frmCarRx.controls[formControlNameValue].addValidators(Validators.minLength(Number(validation.valueValidation)));
           }
           break;
         }
 
         case Validators.maxLength.name: {
           if(validation.status) {
-            validationsControlValues.push(Validators.maxLength(Number(validation.valueValidation)));
+            this.frmCarRx.controls[formControlNameValue].addValidators(Validators.maxLength(Number(validation.valueValidation)));
           }
           break;
         }
         case Validators.pattern.name: {
           if(validation.status) {
-            validationsControlValues.push(Validators.pattern(validation.valueValidation!));
+            this.frmCarRx.controls[formControlNameValue].addValidators(Validators.pattern(validation.valueValidation!));
           }
           break;
         }
       }
-    })
-    this.frmCarRx.setControl(formControlNameValue, ['', validationsControlValues]);
+    });
+    const divCarsForm = this.divCarsControl.nativeElement.querySelector('#carsFormControl');
+    this.renderer.appendChild(divCarsForm, control.control);
+    this.change.detectChanges();
   }
-
 }
 
 interface CarI {

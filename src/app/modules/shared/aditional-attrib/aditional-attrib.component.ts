@@ -67,7 +67,8 @@ export class AditionalAttribComponent {
         this.minLengthValidation,
         this.maxLengthValidation,
         this.patterRegexValidation
-      ]
+      ], 
+      formControlNameValue: this.labelControl.toLowerCase()
     }
     this.newControlEvent.emit(controlData);
   }
