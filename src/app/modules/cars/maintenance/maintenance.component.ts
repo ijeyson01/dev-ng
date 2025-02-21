@@ -40,8 +40,39 @@ export class MaintenanceComponent implements OnInit {
 
   newControl(control: ControlDataI) {
     const divCarsForm = this.divCarsControl.nativeElement.querySelector('#carsFormControl');
-    this.renderer.appendChild(divCarsForm ,control.control);
-    
+    this.renderer.appendChild(divCarsForm, control.control);
+    let formControlNameValue: string = control.control.getAttribute('formControlName')!;
+    let validationsControlValues: Validators[] = [];
+    control.validation.forEach( validation => {
+      switch (validation.validation) {
+        case Validators.required.name: {
+          if(validation.status) {
+            validationsControlValues.push(Validators.required);
+          }
+          break;
+        }
+        case Validators.minLength.name: {
+          if(validation.status) {
+            validationsControlValues.push(Validators.minLength(Number(validation.valueValidation)));
+          }
+          break;
+        }
+
+        case Validators.maxLength.name: {
+          if(validation.status) {
+            validationsControlValues.push(Validators.maxLength(Number(validation.valueValidation)));
+          }
+          break;
+        }
+        case Validators.pattern.name: {
+          if(validation.status) {
+            validationsControlValues.push(Validators.pattern(validation.valueValidation!));
+          }
+          break;
+        }
+      }
+    })
+    this.frmCarRx.setControl(formControlNameValue, ['', validationsControlValues]);
   }
 
 }
