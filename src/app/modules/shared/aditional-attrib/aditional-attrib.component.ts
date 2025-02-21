@@ -1,4 +1,6 @@
 import { Component, EventEmitter, inject, Output, Renderer2 } from '@angular/core';
+import { ControlDataI } from '../../../interfaces/control-data.interface';
+import { ControlValidationsI } from '../../../interfaces/control-validations.interface';
 
 @Component({
   selector: 'app-aditional-attrib',
@@ -12,11 +14,37 @@ export class AditionalAttribComponent {
 
   typeControl: string = '';
   labelControl: string = '';
-  arrayValidationsControl: any[] = [];
+  arrayValidationsControl: ControlValidationsI[] = [];
+  
+  // VALIDACIONES
+
+  //REQUIRED
+  requiredValidation: ControlValidationsI = {
+    validation: 'required',
+    status: false
+  };
+  // LONGITUD MÍNIMA
+  minLengthValidation: ControlValidationsI = {
+    validation: 'minLength',
+    status: false,
+    valueValidation: ''
+  }
+  // LONGITUD MÁXIMA
+  maxLengthValidation: ControlValidationsI = {
+    validation: 'maxLength',
+    status: false,
+    valueValidation: ''
+  }
+  // EXPRESION REGULAR
+  patterRegexValidation: ControlValidationsI = {
+    validation: 'pattern',
+    status: false,
+    valueValidation: ''
+  }
 
   newCtrlEvent: any;
 
-  @Output() newControlEvent = new EventEmitter<HTMLElement>();
+  @Output() newControlEvent = new EventEmitter<ControlDataI>();
 
   createElement() {
     let container: HTMLElement = this.renderer.createElement('div');
@@ -32,6 +60,15 @@ export class AditionalAttribComponent {
     this.renderer.addClass(control, 'mt-2');
     this.renderer.appendChild(container, labelControlHTML);
     this.renderer.appendChild(container, control);
-    this.newControlEvent.emit(container);
+    let controlData: ControlDataI = {
+      control: container,
+      validation: [
+        this.requiredValidation,
+        this.minLengthValidation,
+        this.maxLengthValidation,
+        this.patterRegexValidation
+      ]
+    }
+    this.newControlEvent.emit(controlData);
   }
 }

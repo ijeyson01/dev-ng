@@ -33,26 +33,26 @@
                             Validaciones
                          </div>
                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="requeridoname" id="requeridoid">
+                            <input class="form-check-input" [(ngModel)]="requiredValidation.status" type="checkbox" name="requeridoname" id="requeridoid">
                             <label class="form-check-label" for="requeridoid"> Requerido </label>
                          </div>
                          <div class="input-group mt-2">
                             <div class="input-group-text">
-                                <input class="form-check-input" type="checkbox" name="lminimaname" id="lminimaid">
+                                <input class="form-check-input" [(ngModel)]="minLengthValidation.status" type="checkbox" name="lminimaname" id="lminimaid">
                             </div>
-                            <input class="form-control" type="text" name="longitudvaluename" id="longitudvalueid" placeholder="Longitud mínima" >
+                            <input class="form-control" type="text" [disabled]="!minLengthValidation.status" [(ngModel)]="minLengthValidation.valueValidation" name="longitudvaluename" id="longitudvalueid" placeholder="Longitud mínima" >
                          </div>
                          <div class="input-group mt-2">
                             <div class="input-group-text">
-                                <input class="form-check-input" type="checkbox" name="lmaximaname" id="lmaximaid">
+                                <input class="form-check-input" [(ngModel)]="maxLengthValidation.status" type="checkbox" name="lmaximaname" id="lmaximaid">
                             </div>
-                            <input class="form-control" type="text" name="longitudvaluename" id="longitudvalueid" placeholder="Longitud máxima" >
+                            <input class="form-control" type="text" [disabled]="!maxLengthValidation.status" [(ngModel)]="maxLengthValidation.valueValidation" name="longitudvaluename" id="longitudvalueid" placeholder="Longitud máxima" >
                          </div>
                          <div class="input-group mt-2">
                             <div class="input-group-text">
-                                <input class="form-check-input" type="checkbox" name="lregexname" id="lregexid">
+                                <input class="form-check-input" [(ngModel)]="patterRegexValidation.status" type="checkbox" name="lregexname" id="lregexid">
                             </div>
-                            <input class="form-control" type="text" name="longitudvaluename" id="longitudvalueid" placeholder="Regex" >
+                            <input class="form-control" type="text" [disabled]="!patterRegexValidation.status" [(ngModel)]="patterRegexValidation.valueValidation" name="regexvaluename" id="regexdvalueid" placeholder="Regex" >
                          </div>
                     </div>
                 </div>

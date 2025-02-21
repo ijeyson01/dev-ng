@@ -1,5 +1,6 @@
 import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ControlDataI } from '../../../interfaces/control-data.interface';
 
 @Component({
   selector: 'app-maintenance',
@@ -37,9 +38,10 @@ export class MaintenanceComponent implements OnInit {
     // alert(JSON.stringify(this.frmCarRx.value.marca));
   }
 
-  newControl(control: HTMLElement) {
+  newControl(control: ControlDataI) {
     const divCarsForm = this.divCarsControl.nativeElement.querySelector('#carsFormControl');
-    this.renderer.appendChild(divCarsForm ,control);
+    this.renderer.appendChild(divCarsForm ,control.control);
+    
   }
 
 }
