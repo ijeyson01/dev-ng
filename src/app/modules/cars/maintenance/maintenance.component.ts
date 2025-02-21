@@ -8,11 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class MaintenanceComponent implements OnInit {
 
-  @ViewChild('carsFormControl') divCarsControl!: ElementRef;
   renderer = inject(Renderer2);
 
-  
-  constructor(private readonly frmBuilder: FormBuilder){}
+  constructor(private readonly frmBuilder: FormBuilder, private divCarsControl: ElementRef){}
 
   frmCarRx!: FormGroup;
 
@@ -40,7 +38,8 @@ export class MaintenanceComponent implements OnInit {
   }
 
   newControl(control: HTMLElement) {
-    this.renderer.appendChild(this.divCarsControl ,control);
+    const divCarsForm = this.divCarsControl.nativeElement.querySelector('#carsFormControl');
+    this.renderer.appendChild(divCarsForm ,control);
   }
 
 }

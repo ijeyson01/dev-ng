@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AditionalAttribComponent } from './aditional-attrib/aditional-attrib.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +10,8 @@ import { AditionalAttribComponent } from './aditional-attrib/aditional-attrib.co
     AditionalAttribComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     AditionalAttribComponent
