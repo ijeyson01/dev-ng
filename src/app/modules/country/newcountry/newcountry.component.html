@@ -1,1 +1,40 @@
-<p>newcountry works!</p>
+<div>
+    <div class="h2">
+        Pa&iacute;ses
+    </div>
+    <div>
+        <div>
+            <!-- ATRIBUTOS DEL FORMULARIO -->
+             <form [formGroup]="frmCountryRx">
+                <div>
+                    <label for="nameid">Nombre:</label>
+                    <input class="form-control" type="text" formControlName="name" name="namename" id="nameid">
+                </div>
+                <div>
+                    <label for="acronymid">Acr&oacute;nimo:</label>
+                    <input class="form-control" type="text" formControlName="acronym" name="acronymname" id="acronymid">
+                </div>
+                <div>
+                    <label for="countryCodeid">C&oacute;digo de pa&iacute;s:</label>
+                    <input class="form-control" type="text" formControlName="countryCode" name="contryCodename" id="countryCodeid">
+                </div>
+                <div>
+                    <label for="continentid">Continente:</label>
+                    <select formControlName="continent" class="form-select" name="continentname" id="continentid">
+                        <option value="">Seleccione un continente</option>
+                        <option value="America">Am&eacute;rica</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europa">Europa</option>
+                        <option value="Africa">&Aacute;frica</option>
+                        <option value="Oceania">Oceania</option>
+                    </select>
+                </div>
+                <div class="m-3">
+                   <button class="btn btn-success m-1" type="submit">Guardar</button>
+                   <button class="btn btn-warning m-1" type="button">Limpiar formulario</button>
+                </div>
+             </form>
+        </div>
+        
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CountryRoutingModule } from './country-routing.module';
 import { NewcountryComponent } from './newcountry/newcountry.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { NewcountryComponent } from './newcountry/newcountry.component';
   ],
   imports: [
     CommonModule,
-    CountryRoutingModule
+    CountryRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class CountryModule { }
