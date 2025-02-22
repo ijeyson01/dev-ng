@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ControlDataI } from '../../../interfaces/control-data.interface';
 
 @Component({
@@ -7,9 +7,16 @@ import { ControlDataI } from '../../../interfaces/control-data.interface';
   templateUrl: './maintenance.component.html',
   styles: ``
 })
-export class MaintenanceComponent implements OnInit {
+export class MaintenanceComponent implements OnInit, AfterViewChecked {
 
   renderer = inject(Renderer2);
+
+
+
+  ngAfterViewChecked(): void {
+    this.frmCarRx.updateValueAndValidity();
+    this.change.detectChanges();
+  }
 
   constructor(private readonly frmBuilder: FormBuilder, private divCarsControl: ElementRef, private readonly change: ChangeDetectorRef){}
 
@@ -43,7 +50,8 @@ export class MaintenanceComponent implements OnInit {
     let formControlNameValue: string = control.formControlNameValue;
     // AGREGAR UN OBJETO DE TIPO FORMCONTROL AL OBJETO DE FORMULARIO REACTIVO CON NUESTRO
     // CONTROL:
-    this.frmCarRx.addControl(formControlNameValue, new FormControl());
+    let newControl = new FormControl('')
+    // let formCar = this.frmCarRx.get('attributes') as FormArray;
     control.validation.forEach( validation => {
 
       // VALIDAR LA EXISTENCIA DE LAS VALIDACIONES DEFINIDAS PARA EL CONTROL:
@@ -52,34 +60,42 @@ export class MaintenanceComponent implements OnInit {
           if(validation.status) {
             // SI LA VALIDACION SE APLICÓ, SE AGREGA AL CONTROL PREVIAMENTE AGREGADO
             // DE LA SIGUIENTE MANERA
-            this.frmCarRx.controls[formControlNameValue].addValidators(Validators.required);
+            //this.frmCarRx.controls[formControlNameValue].addValidators();
+            newControl.addValidators(Validators.required)
           }
           break;
         }
         case Validators.minLength.name: {
           if(validation.status) {
-            this.frmCarRx.controls[formControlNameValue].addValidators(Validators.minLength(Number(validation.valueValidation)));
+            // this.frmCarRx.controls[formControlNameValue].addValidators(Validators.minLength(Number(validation.valueValidation)));
+            newControl.addValidators(Validators.minLength(Number(validation.valueValidation)));
           }
           break;
         }
 
         case Validators.maxLength.name: {
           if(validation.status) {
-            this.frmCarRx.controls[formControlNameValue].addValidators(Validators.maxLength(Number(validation.valueValidation)));
+            // this.frmCarRx.controls[formControlNameValue].addValidators(Validators.maxLength(Number(validation.valueValidation)));
+            newControl.addValidators(Validators.maxLength(Number(validation.valueValidation)));
           }
           break;
         }
         case Validators.pattern.name: {
           if(validation.status) {
-            this.frmCarRx.controls[formControlNameValue].addValidators(Validators.pattern(validation.valueValidation!));
+            // this.frmCarRx.controls[formControlNameValue].addValidators(Validators.pattern(validation.valueValidation!));
+            newControl.addValidators(Validators.pattern(validation.valueValidation!));
           }
           break;
         }
       }
     });
+    // formCar.push({name: formControlNameValue, control: newControl});
+    this.frmCarRx.addControl(formControlNameValue, newControl)
     const divCarsForm = this.divCarsControl.nativeElement.querySelector('#carsFormControl');
     this.renderer.appendChild(divCarsForm, control.control);
     this.change.detectChanges();
+    this.frmCarRx.updateValueAndValidity();
+    
   }
 }
 

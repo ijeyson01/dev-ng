@@ -53,9 +53,9 @@ export class AditionalAttribComponent {
     labelControlHTML.innerText = this.labelControl;
     let control: HTMLElement = this.renderer.createElement('input');
     this.renderer.setAttribute(control, 'type', 'text')
+    this.renderer.setAttribute(control, 'formControlName', `${this.labelControl.toLowerCase()}`);
     this.renderer.setAttribute(control, 'id', `${this.labelControl.toLowerCase()}id`);
     this.renderer.setAttribute(control, 'name', `${this.labelControl.toLowerCase()}name`);
-    this.renderer.setAttribute(control, 'formControlName', `${this.labelControl.toLowerCase()}`);
     this.renderer.addClass(control, 'form-control');
     this.renderer.addClass(control, 'mt-2');
     this.renderer.appendChild(container, labelControlHTML);
