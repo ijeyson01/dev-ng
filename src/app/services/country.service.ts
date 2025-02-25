@@ -14,11 +14,11 @@ export class CountryService {
   constructor(private readonly httpClient: HttpClient) { }
 
   findById(id: string) {
-
+    
   }
 
   findAll() {
-
+    return this.httpClient.get(`${this.urlBase}${this.uriCountry}`);
   }
 
   saveCountry(country: CountryI) { // create 

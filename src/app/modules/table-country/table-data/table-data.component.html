@@ -5,22 +5,33 @@
     <div>
         <table class="table">
             <thead>
-                <th>#</th>
                 <th>Pa&iacute;s</th>
                 <th>Acr&oacute;nimo</th>
                 <th>C&oacute;digo de pa&iacute;s</th>
                 <th>Continente</th>
             </thead>
             <tbody>
-                <ng-template>
+                <ng-container *ngIf="statusData==='init'">
                     <!-- Cargando: cuando el componente aún no haya cargado la información de los países -->
-                </ng-template>
-                <ng-template>
+                     <tr>
+                        <td colspan="4" class="text-center">Cargando pa&iacute;ses...</td>
+                     </tr>
+                </ng-container>
+                <ng-container *ngIf="statusData=='success'">
                     <!-- Cargado - Con datos: Cuando el componente tiene información -->
-                </ng-template>
-                <ng-template>
+                     <tr *ngFor="let country of counstries">
+                        <td> {{ country.name }}</td>
+                        <td> {{ country.acronym }}</td>
+                        <td> {{ country.countryCode }} </td>
+                        <td> {{ country.continent }} </td>
+                     </tr>
+                </ng-container>
+                <ng-container *ngIf="statusData=='empty'">
                     <!-- Vacío: Cuando no existen datos para mostrar -->
-                </ng-template>
+                    <tr>
+                        <td colspan="4" class="text-center">Sin pa&iacute;ses registrads</td>
+                     </tr>
+                </ng-container>
             </tbody>
         </table>
     </div>
