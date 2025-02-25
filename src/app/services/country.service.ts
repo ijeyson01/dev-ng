@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpsServiceService } from './https-service.service';
+import { CountryI } from '../interfaces/country.interface';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountryService {
 
-  constructor(private readonly httpService: HttpsServiceService) { }
+  uriCountry: string = environment.URI_COUNTRY;
+  urlBase: string = environment.URL_BASE;
+
+  constructor(private readonly httpClient: HttpClient) { }
 
   findById(id: string) {
 
@@ -16,7 +21,7 @@ export class CountryService {
 
   }
 
-  saveCountry(country: any) {
-    
+  saveCountry(country: CountryI) { // create 
+    return this.httpClient.post(`${this.urlBase}${this.uriCountry}`, country);
   }
 }

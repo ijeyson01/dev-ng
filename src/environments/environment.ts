@@ -1,4 +1,4 @@
 export const environment = {
-    URL_BASE: 'https://crudcrud.com/api/0cb58ac499344002b24a4b397c7ad2f4',
+    URL_BASE: 'https://crudcrud.com/api/c6ffb9291c1d47f19416fd4e4dfe733f',
     URI_COUNTRY: '/paises/'
 };
