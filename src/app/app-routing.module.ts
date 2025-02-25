@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'country', pathMatch: 'full'
+    path: '', redirectTo: 'table-country', pathMatch: 'full'
   },
   {
     path: 'cars', 
@@ -19,6 +19,10 @@ const routes: Routes = [
    {
     path: 'country',
     loadChildren: () => import('./modules/country/country.module').then( m => m.CountryModule)
+   },
+   {
+    path: 'table-country',
+    loadChildren: () => import('./modules/table-country/table-country.module').then(m => m.TableCountryModule)
    }
 ];
 
