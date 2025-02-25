@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TableCountryRoutingModule } from './table-country-routing.module';
 import { TableDataComponent } from './table-data/table-data.component';
+import { CountryModule } from '../country/country.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { TableDataComponent } from './table-data/table-data.component';
   ],
   imports: [
     CommonModule,
-    TableCountryRoutingModule
+    TableCountryRoutingModule,
+    CountryModule
   ]
 })
 export class TableCountryModule { }

@@ -14,6 +14,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CountryRoutingModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    NewcountryComponent
   ]
 })
 export class CountryModule { }

@@ -24,24 +24,24 @@ export class TableDataComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     
-    this.countryService.findAll().subscribe({
-      next: (value) => {
-        let countriesResponse: CountryI[] = value as CountryI[];
-        if(countriesResponse.length > 0) {
-          this.statusData = 'success';
-          this.counstries.push(...countriesResponse);
-        } else {
-          this.statusData = 'empty';
-        }
-        this.changeDetector.detectChanges();
-      },
-      error: (error) => {
+    // this.countryService.findAll().subscribe({
+    //   next: (value) => {
+    //     let countriesResponse: CountryI[] = value as CountryI[];
+    //     if(countriesResponse.length > 0) {
+    //       this.statusData = 'success';
+    //       this.counstries.push(...countriesResponse);
+    //     } else {
+    //       this.statusData = 'empty';
+    //     }
+    //     this.changeDetector.detectChanges();
+    //   },
+    //   error: (error) => {
 
-      },
-      complete: () => {
+    //   },
+    //   complete: () => {
 
-      }
-    });
+    //   }
+    // });
   }
 
 }

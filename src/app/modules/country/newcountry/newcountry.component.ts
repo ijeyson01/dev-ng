@@ -10,6 +10,7 @@ import { CountryI } from '../../../interfaces/country.interface';
 })
 export class NewcountryComponent implements OnInit {
 
+  id: any;
   frmBuilder = inject(FormBuilder);
   countryService = inject(CountryService);
 
@@ -51,7 +52,7 @@ export class NewcountryComponent implements OnInit {
         }
       });
     } else {
-      alert('Los datos ingresados están incompletos o son inválidos')
+      alert('Los datos ingresados están incompletos o son inválidos');
     }
   }
 }
