@@ -8,8 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CountryService {
 
-  uriCountry: string = environment.URI_COUNTRY;
-  urlBase: string = environment.URL_BASE;
+  readonly uriCountry: string = environment.URI_COUNTRY;
+  readonly urlBase: string = environment.URL_BASE;
 
   constructor(private readonly httpClient: HttpClient) { }
 
@@ -23,5 +23,13 @@ export class CountryService {
 
   saveCountry(country: CountryI) { // create 
     return this.httpClient.post(`${this.urlBase}${this.uriCountry}`, country);
+  }
+
+  updateCountry( country: CountryI, idCountry: string ) {
+    return this.httpClient.put(`${this.urlBase}${this.uriCountry}${idCountry}`, country );
+  }
+
+  deleteCountry( countryId: string ) {
+    return this.httpClient.delete(`${this.urlBase}${this.uriCountry}${countryId}`);
   }
 }

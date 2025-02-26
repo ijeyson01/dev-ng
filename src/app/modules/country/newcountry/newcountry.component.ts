@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountryService } from '../../../services/country.service';
 import { CountryI } from '../../../interfaces/country.interface';
@@ -12,6 +12,9 @@ export class NewcountryComponent implements OnInit {
 
   @Input()
   process: string = ''; // create 
+
+  @Output()
+  loadTableEvent = new EventEmitter();
   
   id: any = '0';
   frmBuilder = inject(FormBuilder);
@@ -57,5 +60,7 @@ export class NewcountryComponent implements OnInit {
     } else {
       alert('Los datos ingresados están incompletos o son inválidos');
     }
+    this.frmCountryRx.reset();
+    this.loadTableEvent.emit();
   }
 }

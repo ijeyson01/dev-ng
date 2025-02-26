@@ -15,23 +15,11 @@ export class TableDataComponent implements AfterViewInit {
     acronymUpdated: string = '';
     countryCodeUpdated: string = '';
     continentUpdated: string = '';
+  
+    countryIdToDelete: string = '';
 
-  counstries: CountryI[] = [
-    {
-       name: 'Ecuador',
-       acronym: 'EC',
-       continent: 'América',
-       countryCode: '593'
-    }
-  ];
+  counstries: CountryI[] = [];
 
-  countryUpdate: CountryI = {
-    _id: '',
-    name: '',
-    acronym: '',
-    continent: '',
-    countryCode: ''
-  };
 
   statusData: string = 'success'; // init::cargando - success::información cargada - empty::sin datos
 
@@ -40,25 +28,29 @@ export class TableDataComponent implements AfterViewInit {
   constructor( private readonly countryService: CountryService, private readonly changeDetector: ChangeDetectorRef ){}
 
   ngAfterViewInit(): void {
-    
-    // this.countryService.findAll().subscribe({
-    //   next: (value) => {
-    //     let countriesResponse: CountryI[] = value as CountryI[];
-    //     if(countriesResponse.length > 0) {
-    //       this.statusData = 'success';
-    //       this.counstries.push(...countriesResponse);
-    //     } else {
-    //       this.statusData = 'empty';
-    //     }
-    //     this.changeDetector.detectChanges();
-    //   },
-    //   error: (error) => {
+    this.loadTable();
+  }
 
-    //   },
-    //   complete: () => {
+  loadTable() {
+    this.countryService.findAll().subscribe({
+      next: (value) => {
+        let countriesResponse: CountryI[] = value as CountryI[];
+        this.counstries = [];
+        if(countriesResponse.length > 0) {
+          this.statusData = 'success';
+          this.counstries.push(...countriesResponse);
+        } else {
+          this.statusData = 'empty';
+        }
+        this.changeDetector.detectChanges();
+      },
+      error: (error) => {
 
-    //   }
-    // });
+      },
+      complete: () => {
+
+      }
+    });
   }
 
     formInit(): FormGroup {
@@ -79,7 +71,43 @@ export class TableDataComponent implements AfterViewInit {
   }
 
   updateCountry() {
+    let countryUpdate: CountryI = {
+      name: this.nameUpdated,
+      acronym: this.acronymUpdated,
+      countryCode: this.countryCodeUpdated,
+      continent: this.continentUpdated
+    }
+    this.countryService.updateCountry(countryUpdate, this.idUpdated).subscribe({
+      next: (value) => {
+        let valuerResponse : any = value;
+        
+        alert( `País actualizado correctamente: ${valuerResponse._id}`);
+      },
+      error : (error) => {
 
+      },
+      complete: () => {
+        this.loadTable();
+      }
+    });
+  }
+
+  dataToDeleteCountry(countryId: string) {
+    this.countryIdToDelete = countryId;
+  }
+
+  deleteCountry() {
+    this.countryService.deleteCountry(this.countryIdToDelete).subscribe({
+      next: (value) => {
+        alert( `País eliminado correctamente: ${this.countryIdToDelete}`);
+      },
+      error: (error) => {
+        alert( `Error al eliminar país: ${this.countryIdToDelete}`);
+      },
+      complete: () => {
+        this.loadTable();
+      }
+    })
   }
 
 }

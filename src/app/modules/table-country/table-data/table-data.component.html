@@ -3,7 +3,7 @@
         Lista de pa&iacute;ses registrados
     </div>
     <div>
-        <app-newcountry></app-newcountry>
+        <app-newcountry (loadTableEvent)="loadTable()"></app-newcountry>
         <!-- <button class="btn btn-success" type="button">Nuevo pa&iacute;s</button> -->
     </div>
     <div class="d-flex justify-content-center">
@@ -32,7 +32,7 @@
                         <td class="text-end">
                             <button class="btn btn-primary mx-1" type="button" data-bs-toggle="modal"
                                  [attr.data-bs-target]="'#countryup'" (click)="selectCountryUpdate(country)" ><i class="fa fa-pencil"></i> </button> 
-                            <button class="btn btn-danger" type="button"> <i class="fa fa-trash"></i> </button>
+                            <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteCountryModal" (click)="dataToDeleteCountry(country._id!)"> <i class="fa fa-trash"></i> </button>
                         </td>
                      </tr>
                 </ng-container>
@@ -91,4 +91,23 @@
             </div>
         </div>
     </div>
+</div>
+  
+  <!-- Modal -->
+<div class="modal fade" id="deleteCountryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminación de país</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        ¿Está seguro de eliminar al país seleccionado?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteCountry()">Eliminar</button>
+    </div>
+    </div>
+</div>
 </div>
