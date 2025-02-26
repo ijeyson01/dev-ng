@@ -30,7 +30,8 @@
                         <td> {{ country.countryCode }} </td>
                         <td> {{ country.continent }} </td>
                         <td class="text-end">
-                            <button class="btn btn-primary mx-1" type="button"><i class="fa fa-pencil"></i> </button> 
+                            <button class="btn btn-primary mx-1" type="button" data-bs-toggle="modal"
+                                 [attr.data-bs-target]="'#countryup'" (click)="selectCountryUpdate(country)" ><i class="fa fa-pencil"></i> </button> 
                             <button class="btn btn-danger" type="button"> <i class="fa fa-trash"></i> </button>
                         </td>
                      </tr>
@@ -46,7 +47,7 @@
     </div>
 </div>
 
-<div class="modal fade" [id]="'country'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" [id]="'countryup'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,26 +57,26 @@
             </div>
             <div class="modal-body">
                 <!-- ATRIBUTOS DEL FORMULARIO -->
-                <form [formGroup]="frmCountryRx">
+                <form>
                     <div>
                         <label for="nameid">Nombre:</label>
-                        <input class="form-control" type="text" formControlName="name" name="namename" id="nameid">
+                        <input class="form-control" type="text" [(ngModel)]="nameUpdated" name="namename" id="nameid">
                     </div>
                     <div>
                         <label for="acronymid">Acr&oacute;nimo:</label>
-                        <input class="form-control" type="text" formControlName="acronym" name="acronymname"
+                        <input class="form-control" type="text" [(ngModel)]="acronymUpdated" name="acronymname"
                             id="acronymid">
                     </div>
                     <div>
                         <label for="countryCodeid">C&oacute;digo de pa&iacute;s:</label>
-                        <input class="form-control" type="text" formControlName="countryCode" name="contryCodename"
+                        <input class="form-control" type="text" [(ngModel)]="countryCodeUpdated" name="contryCodename"
                             id="countryCodeid">
                     </div>
                     <div>
                         <label for="continentid">Continente:</label>
-                        <select formControlName="continent" class="form-select" name="continentname" id="continentid">
+                        <select [(ngModel)]="continentUpdated" class="form-select" name="continentname" id="continentid">
                             <option value="">Seleccione un continente</option>
-                            <option value="America">Am&eacute;rica</option>
+                            <option value="América">Am&eacute;rica</option>
                             <option value="Asia">Asia</option>
                             <option value="Europa">Europa</option>
                             <option value="Africa">&Aacute;frica</option>

@@ -11,7 +11,7 @@ export class NewcountryComponent implements OnInit {
 
 
   @Input()
-  process: string = ''; // create - update
+  process: string = ''; // create 
   
   id: any = '0';
   frmBuilder = inject(FormBuilder);

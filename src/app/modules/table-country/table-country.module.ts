@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TableCountryRoutingModule } from './table-country-routing.module';
 import { TableDataComponent } from './table-data/table-data.component';
 import { CountryModule } from '../country/country.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     TableCountryRoutingModule,
     CountryModule,
-    ReactiveFormsModule
+    FormsModule
   ]
 })
 export class TableCountryModule { }

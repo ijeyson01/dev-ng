@@ -10,7 +10,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class TableDataComponent implements AfterViewInit {
 
-  frmCountryRx!: FormGroup;
+    idUpdated: string = '';
+    nameUpdated: string = '';
+    acronymUpdated: string = '';
+    countryCodeUpdated: string = '';
+    continentUpdated: string = '';
 
   counstries: CountryI[] = [
     {
@@ -20,6 +24,14 @@ export class TableDataComponent implements AfterViewInit {
        countryCode: '593'
     }
   ];
+
+  countryUpdate: CountryI = {
+    _id: '',
+    name: '',
+    acronym: '',
+    continent: '',
+    countryCode: ''
+  };
 
   statusData: string = 'success'; // init::cargando - success::información cargada - empty::sin datos
 
@@ -49,10 +61,6 @@ export class TableDataComponent implements AfterViewInit {
     // });
   }
 
-    ngOnInit(): void {
-      this.frmCountryRx = this.formInit();
-    }
-  
     formInit(): FormGroup {
       return this.frmBuilder.group({
         name: ['', [Validators.required]],
@@ -61,6 +69,14 @@ export class TableDataComponent implements AfterViewInit {
         continent: ['', [Validators.required]]
       });
     }
+
+  selectCountryUpdate(country: CountryI) {
+    this.idUpdated = country._id!;
+    this.nameUpdated = country.name;
+    this.acronymUpdated = country.acronym;
+    this.countryCodeUpdated = country.countryCode;
+    this.continentUpdated = country.continent;
+  }
 
   updateCountry() {
 
