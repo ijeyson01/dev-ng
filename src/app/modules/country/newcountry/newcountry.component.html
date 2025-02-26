@@ -1,7 +1,9 @@
-<button data-bs-toggle="modal" [attr.data-bs-target]="'#country-'+id" class="btn btn-success">
-    <i class="fa fa-plus"></i>Nuevo
-</button>
-<div class="modal fade" [id]="'country-'+id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="d-flex flex-row justify-content-end">
+    <button data-bs-toggle="modal" [attr.data-bs-target]="'#country'" class="btn btn-success">
+        Nuevo <i class="fa fa-plus"></i> 
+    </button>
+</div>
+<div class="modal fade" [id]="'country'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

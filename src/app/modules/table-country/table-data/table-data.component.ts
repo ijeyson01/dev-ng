@@ -1,6 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { CountryI } from '../../../interfaces/country.interface';
 import { CountryService } from '../../../services/country.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-table-data',
@@ -8,6 +9,8 @@ import { CountryService } from '../../../services/country.service';
   styles: ``
 })
 export class TableDataComponent implements AfterViewInit {
+
+  frmCountryRx!: FormGroup;
 
   counstries: CountryI[] = [
     {
@@ -19,6 +22,8 @@ export class TableDataComponent implements AfterViewInit {
   ];
 
   statusData: string = 'success'; // init::cargando - success::información cargada - empty::sin datos
+
+  frmBuilder = inject(FormBuilder);
 
   constructor( private readonly countryService: CountryService, private readonly changeDetector: ChangeDetectorRef ){}
 
@@ -42,6 +47,23 @@ export class TableDataComponent implements AfterViewInit {
 
     //   }
     // });
+  }
+
+    ngOnInit(): void {
+      this.frmCountryRx = this.formInit();
+    }
+  
+    formInit(): FormGroup {
+      return this.frmBuilder.group({
+        name: ['', [Validators.required]],
+        acronym: ['', [Validators.required, Validators.maxLength(5)]],
+        countryCode: ['', [Validators.required, Validators.maxLength(5)]],
+        continent: ['', [Validators.required]]
+      });
+    }
+
+  updateCountry() {
+
   }
 
 }

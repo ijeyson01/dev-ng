@@ -1,8 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountryService } from '../../../services/country.service';
 import { CountryI } from '../../../interfaces/country.interface';
-
 @Component({
   selector: 'app-newcountry',
   templateUrl: './newcountry.component.html',
@@ -10,7 +9,11 @@ import { CountryI } from '../../../interfaces/country.interface';
 })
 export class NewcountryComponent implements OnInit {
 
-  id: any;
+
+  @Input()
+  process: string = ''; // create - update
+  
+  id: any = '0';
   frmBuilder = inject(FormBuilder);
   countryService = inject(CountryService);
 
